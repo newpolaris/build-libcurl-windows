@@ -1,50 +1,40 @@
-@echo off
 setlocal EnableDelayedExpansion 
 
-set PROGFILES=%ProgramFiles%
-if not "%ProgramFiles(x86)%" == "" set PROGFILES=%ProgramFiles(x86)%
-
-REM Check if Visual Studio 2013 is installed
-set MSVCDIR="%PROGFILES%\Microsoft Visual Studio 12.0"
-if exist %MSVCDIR% (
-    set COMPILER_VER="2013"
-	goto setup_env
-)
-
-REM Check if Visual Studio 2012 is installed
-set MSVCDIR="%PROGFILES%\Microsoft Visual Studio 11.0"
-if exist %MSVCDIR% (
-    set COMPILER_VER="2012"
-	goto setup_env
-)
-
-REM Check if Visual Studio 2010 is installed
-set MSVCDIR="%PROGFILES%\Microsoft Visual Studio 10.0"
-if exist %MSVCDIR% (
-    set COMPILER_VER="2010"
-	goto setup_env
-)
-
-REM Check if Visual Studio 2008 is installed
-set MSVCDIR="%PROGFILES%\Microsoft Visual Studio 9.0"
-if exist %MSVCDIR% (
-    set COMPILER_VER="2008"
-	goto setup_env
-)
-
 REM Check if Visual Studio 2005 is installed
-set MSVCDIR="%PROGFILES%\Microsoft Visual Studio 8"
+set MSVCDIR=%VS80COMNTOOLS%\..\..
 if exist %MSVCDIR% (
 	set COMPILER_VER="2005"
 	goto setup_env
 ) 
 
-REM Check if Visual Studio 6 is installed
-set MSVCDIR="%PROGFILES%\Microsoft Visual Studio\VC98"
+REM Check if Visual Studio 2008 is installed
+set MSVCDIR=%VS90COMNTOOLS%\..\..
 if exist %MSVCDIR% (
-	set COMPILER_VER="6"
+    set COMPILER_VER="2008"
 	goto setup_env
-) 
+)
+
+REM Check if Visual Studio 2010 is installed
+set MSVCDIR=%VS100COMNTOOLS%\..\..
+if exist %MSVCDIR% (
+    set COMPILER_VER="2010"
+	goto setup_env
+)
+
+REM Check if Visual Studio 2012 is installed
+set MSVCDIR=%VS120COMNTOOLS%\..\..
+if exist %MSVCDIR% (
+    set COMPILER_VER="2012"
+	goto setup_env
+)
+
+REM Check if Visual Studio 2013 is installed
+set MSVCDIR=%VS130COMNTOOLS%\..\..
+if exist %MSVCDIR% (
+    set COMPILER_VER="2013"
+	goto setup_env
+)
+
 
 echo No compiler : Microsoft Visual Studio (6, 2005, 2008, 2010, 2012 or 2013) is not installed.
 goto end
